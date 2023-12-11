@@ -7,25 +7,27 @@ import { getArticles } from '../../utils/utils'
 import ArticleFocus from './ArticleFocus'
 import {Routes, Route} from 'react-router-dom'
 
-const Articles = () => {
+const Articles = ({isLoading, setIsLoading}) => {
     const [articles, setArticles] = useState([])
-    const [currArticle, setCurrArticle] = useState('')
     
     useEffect(() => {
+        setIsLoading(true)
         getArticles()
         .then((articles) => {
             setArticles(articles)
+            setIsLoading(false)
         })
     }, [])
 
     return (
         <div className='articles'>
             <h2>Articles</h2>
+            {isLoading ? <h3>Loading...</h3> : null}
             <Filters />
-            <ArticleCard articles={articles} setCurrArticle={setCurrArticle}/>
             <Routes>
+                <Route path='/' element={<ArticleCard articles={articles} />} />
                 <Route path='/articles/add-article' element={<PostArticle />} />
-                <Route path='/articles/:article_id' element={<ArticleFocus currArticle={currArticle} />} />
+                <Route path='/articles/:article_id' element={<ArticleFocus isLoading={isLoading} setIsLoading={setIsLoading} />} />
             </Routes>
         </div>
     )

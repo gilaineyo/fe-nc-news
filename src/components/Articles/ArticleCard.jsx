@@ -1,11 +1,7 @@
 import './ArticleCard.css'
+import {Link} from 'react-router-dom'
+
 const ArticleCard = ({articles, setCurrArticle}) => {
-
-
-    const handleSeeMore = (article_id) => {
-        setCurrArticle(article_id)
-
-    }
     
     return (
         <div className='article-card'>
@@ -19,7 +15,9 @@ const ArticleCard = ({articles, setCurrArticle}) => {
                         <p className='author'>{author}</p>
                         <p className='topic'>Topic: {topic}</p>
                         <p className='votes'>Votes: {votes}</p>
-                        <button onClick={() => {handleSeeMore(article_id)}}>More</button>
+                        <Link className="link" to={`/articles/${article_id}`}>
+                            <button>More</button>
+                        </Link>
                     </li>
                 )
             })}
