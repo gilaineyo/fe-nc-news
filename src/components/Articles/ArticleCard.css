@@ -1,4 +1,18 @@
 .article-card {
-    width: 50%;
     border: 2px solid red;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+}
+
+img {
+    width: 75px;
+    height: 75px;
+}
+
+ul {
+    list-style: none;
 }
