@@ -5,12 +5,13 @@ import Navigation from './components/Navigation/Navigation'
 import Articles from './components/Articles/Articles'
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <>
       <Header />
       <Navigation />
-      <Articles />
+      <Articles isLoading={isLoading} setIsLoading={setIsLoading} />
     </>
   )
 }
