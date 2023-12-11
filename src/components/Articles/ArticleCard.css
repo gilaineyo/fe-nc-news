@@ -3,14 +3,29 @@
 }
 
 .card {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-areas: 
+        "img title title title"
+        "img author topic votes";
     border: 1px solid black;
 }
 
 img {
-    width: 75px;
-    height: 75px;
+    width: 7em;
+    height: 7em;
+    grid-area: img;
+}
+
+.title {
+    grid-area: title;
+}
+
+.author {
+    grid-area: author;
+}
+
+.votes {
+    grid-area: votes;
 }
 
 ul {

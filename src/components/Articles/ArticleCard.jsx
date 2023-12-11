@@ -10,8 +10,10 @@ const ArticleCard = ({articles}) => {
                 return (
                     <li className="card" key={article_id}>
                         <img src={article_img_url} alt="article image" />
-                        <h4>{title}</h4>
-                        <p>{author}</p>
+                        <h4 className='title'>{title}</h4>
+                        <p className='author'>{author}</p>
+                        <p className='topic'>Topic: {topic}</p>
+                        <p className='votes'>Votes: {votes}</p>
                     </li>
                 )
             })}
