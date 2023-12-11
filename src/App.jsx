@@ -3,6 +3,7 @@ import './App.css'
 import Header from './components/Header/Header'
 import Navigation from './components/Navigation/Navigation'
 import Articles from './components/Articles/Articles'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
 
@@ -10,7 +11,9 @@ function App() {
     <>
       <Header />
       <Navigation />
-      <Articles />
+      <Routes>
+        <Route path='*' element={<Articles />} />
+      </Routes>
     </>
   )
 }

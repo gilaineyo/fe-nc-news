@@ -5,6 +5,7 @@ import Filters from './Filters'
 import PostArticle from './PostArticle'
 import { getArticles } from '../../utils/utils'
 import ArticleFocus from './ArticleFocus'
+import {Routes, Route} from 'react-router-dom'
 
 const Articles = () => {
     const [articles, setArticles] = useState([])
@@ -22,8 +23,10 @@ const Articles = () => {
             <h2>Articles</h2>
             <Filters />
             <ArticleCard articles={articles} setCurrArticle={setCurrArticle}/>
-            <PostArticle />
-            <ArticleFocus currArticle={currArticle} />
+            <Routes>
+                <Route path='/articles/add-article' element={<PostArticle />} />
+                <Route path='/articles/:article_id' element={<ArticleFocus currArticle={currArticle} />} />
+            </Routes>
         </div>
     )
 }
