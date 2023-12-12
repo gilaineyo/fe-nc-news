@@ -1,7 +1,9 @@
 import './ArticleCard.css'
+import {Link} from 'react-router-dom'
 import { getArticles } from '../../utils/utils'
 
 const ArticleCard = ({articles}) => {
+    
     return (
         <div className='article-card'>
             <ul>
@@ -14,6 +16,9 @@ const ArticleCard = ({articles}) => {
                         <p className='author'>{author}</p>
                         <p className='topic'>Topic: {topic}</p>
                         <p className='votes'>Votes: {votes}</p>
+                        <Link className="link" to={`/articles/${article_id}`}>
+                            <button>More</button>
+                        </Link>
                     </li>
                 )
             })}
