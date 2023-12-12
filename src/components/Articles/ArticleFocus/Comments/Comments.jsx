@@ -19,7 +19,7 @@ const Comments = ({article_id, isLoading, setIsLoading}) => {
     return (
         <div className="comments">
             <h3>Comments</h3>
-            <PostComment article_id={article_id} />
+            <PostComment article_id={article_id} setComments={setComments} comments={comments} />
             {isLoading ? <h4>Loading...</h4> : null}
             {comments.length === 0 ? <p>No comments yet...</p> : null }
             {comments.map((comment) => {

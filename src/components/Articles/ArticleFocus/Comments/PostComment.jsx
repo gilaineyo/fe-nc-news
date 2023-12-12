@@ -1,9 +1,9 @@
 import './PostComment.css'
 import { UserContext } from '../../../../contexts/UserContext'
 import { useContext, useState } from 'react'
-import { getUser } from '../../../../utils/utils'
+import { getUser, postCommentToArticle } from '../../../../utils/utils'
 
-const PostComment = ({article_id}) => {
+const PostComment = ({article_id, comments, setComments}) => {
     const { user, setUser } = useContext(UserContext)
     const [usernameInput, setUsernameInput] = useState('')
     const [commentInput, setCommentInput] = useState('')
@@ -32,6 +32,15 @@ const PostComment = ({article_id}) => {
 
     const handleCommentSubmit = (event) => {
         event.preventDefault()
+        const comment = { username: user.username, body: commentInput }
+        postCommentToArticle(article_id, comment)
+        .then((newComment) => {
+          setComments([newComment, ...comments])  
+        })
+        .catch(() => {
+            setIsError(true)
+        })
+        setCommentInput('')
     }
 
     return (
