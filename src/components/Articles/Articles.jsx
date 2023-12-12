@@ -4,7 +4,7 @@ import './Articles.css'
 import Filters from './Filters'
 import PostArticle from './PostArticle'
 import { getArticles } from '../../utils/utils'
-import ArticleFocus from './ArticleFocus'
+import ArticleFocus from './ArticleFocus/ArticleFocus'
 import {Routes, Route, Link} from 'react-router-dom'
 
 const Articles = ({isLoading, setIsLoading}) => {
