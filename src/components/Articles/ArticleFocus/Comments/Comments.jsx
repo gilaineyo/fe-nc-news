@@ -20,7 +20,7 @@ const Comments = ({article_id, isLoading, setIsLoading}) => {
             <h3>Comments</h3>
             {isLoading ? <h4>Loading...</h4> : null}
             {comments.map((comment) => {
-                return <CommentCard comment={comment} />
+                return <CommentCard key={comment.comment_id} comment={comment} />
             })}
         </div>
     )

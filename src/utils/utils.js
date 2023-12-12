@@ -24,3 +24,10 @@ export const getArticleComments = (article_id) => {
         return data.comments
     })
 }
+
+export const getUserDetails = (username) => {
+    return newsApi.get(`/api/users/${username}`)
+    .then(({data}) => {
+        return data.user
+    })
+}
