@@ -1,0 +1,23 @@
+.comment-card {
+    border: 1px solid black;
+    display: grid;
+    grid-template-areas:
+        "avatar posted upvote"
+        "avatar body body";
+}
+
+.avatar {
+    grid-area: avatar;
+}
+
+.posted-details {
+    grid-area: posted;
+}
+
+.comment-body {
+    grid-area: body;
+}
+
+.upvote {
+    grid-area: upvote;
+}
