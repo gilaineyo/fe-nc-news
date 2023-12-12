@@ -17,3 +17,10 @@ export const getSingleArticle = (article_id) => {
         return data.article
     })
 } 
+
+export const patchArticle = (article_id, vote) => {
+    return newsApi.patch(`/api/articles/${article_id}`, vote)
+    .then(({data}) => {
+        return data.article
+    })
+}
