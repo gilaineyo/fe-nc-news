@@ -31,3 +31,10 @@ export const getUserDetails = (username) => {
         return data.user
     })
 }
+
+export const postCommentToArticle = (article_id, comment) => {
+    return newsApi.post(`/api/articles/${article_id}/comments`, comment)
+    .then(({data}) => {
+        return data.comment
+    })
+}
