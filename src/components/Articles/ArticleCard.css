@@ -5,8 +5,8 @@
 .card {
     display: grid;
     grid-template-areas: 
-        "img title title title"
-        "img author topic votes";
+        "img title title title more"
+        "img author topic votes comments";
     border: 1px solid black;
 }
 
@@ -26,6 +26,18 @@ img {
 
 .votes {
     grid-area: votes;
+}
+
+.more {
+    grid-area: more;
+}
+
+.comment-count {
+    grid-area: comments;
+}
+
+.topic {
+    grid-area: topic;
 }
 
 ul {

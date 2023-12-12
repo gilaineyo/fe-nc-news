@@ -5,7 +5,7 @@ import CommentCard from './CommentCard'
 
 const Comments = ({article_id, isLoading, setIsLoading}) => {
     const [comments, setComments] = useState([])    
-    
+
     useEffect(() => {
         setIsLoading(true)
         getArticleComments(article_id)
@@ -14,11 +14,12 @@ const Comments = ({article_id, isLoading, setIsLoading}) => {
             setIsLoading(false)
         })
     }, [])
-
+    
     return (
         <div className="comments">
             <h3>Comments</h3>
             {isLoading ? <h4>Loading...</h4> : null}
+            {comments.length === 0 ? <p>No comments yet...</p> : null }
             {comments.map((comment) => {
                 return <CommentCard key={comment.comment_id} comment={comment} />
             })}

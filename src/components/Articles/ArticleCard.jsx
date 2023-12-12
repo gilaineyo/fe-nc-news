@@ -1,6 +1,5 @@
 import './ArticleCard.css'
 import {Link} from 'react-router-dom'
-import { getArticles } from '../../utils/utils'
 
 const ArticleCard = ({articles}) => {
     
@@ -8,7 +7,7 @@ const ArticleCard = ({articles}) => {
         <div className='article-card'>
             <ul>
             {articles.map((article) => {
-                const { author, title, article_id, article_img_url, comment_count, votes, topic, created_at } = article
+                const { author, title, article_id, article_img_url, comment_count, votes, topic } = article
                 return (
                     <li className="card" key={article_id}>
                         <img src={article_img_url} alt="article image" />
@@ -16,8 +15,9 @@ const ArticleCard = ({articles}) => {
                         <p className='author'>{author}</p>
                         <p className='topic'>Topic: {topic}</p>
                         <p className='votes'>Votes: {votes}</p>
+                        <p className='comment-count'>Comments: {comment_count}</p>
                         <Link className="link" to={`/articles/${article_id}`}>
-                            <button>More</button>
+                            <button className='more'>More</button>
                         </Link>
                     </li>
                 )
