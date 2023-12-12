@@ -28,7 +28,7 @@ const ArticleFocus = ({isLoading, setIsLoading}) => {
             <p>{topic}</p>
             <p>Votes: {votes}, Comments: {comment_count}</p>
             <p>{body}</p>
-            <Link className="link" to={`/articles`}>
+            <Link className="link" to={`/`}>
                 <button>Back to Articles</button>
             </Link>
         </div>

@@ -12,9 +12,7 @@ function App() {
     <>
       <Header />
       <Navigation />
-      <Routes>
-        <Route path='*' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading} />} />
-      </Routes>
+      <Articles isLoading={isLoading} setIsLoading={setIsLoading} />
     </>
   )
 }
