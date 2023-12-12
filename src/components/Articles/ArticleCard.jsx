@@ -1,7 +1,8 @@
 import './ArticleCard.css'
 import {Link} from 'react-router-dom'
+import { getArticles } from '../../utils/utils'
 
-const ArticleCard = ({articles, setCurrArticle}) => {
+const ArticleCard = ({articles}) => {
     
     return (
         <div className='article-card'>
