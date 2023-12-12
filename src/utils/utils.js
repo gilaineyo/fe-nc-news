@@ -23,6 +23,9 @@ export const patchArticle = (article_id, vote) => {
     .then(({data}) => {
         return data.article
     })
+    .catch((err) => {
+        return vote
+    })
 }   
      
 

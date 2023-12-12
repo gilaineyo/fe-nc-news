@@ -21,31 +21,25 @@ const ArticleFocus = ({isLoading, setIsLoading}) => {
     }, [])
     
 
-    const { title, author, body, created_at, comment_count, topic, article_img_url } = currArticle
+    const { title, author, body, created_at, comment_count, votes, topic, article_img_url } = currArticle
     const postedAt = new Date(created_at)
 
     const handleVote = () => {
         const vote = { inc_votes: !hasVoted ? 1 : -1}
-        setLocalVotes(localVotes + vote.inc_votes)
+        setLocalVotes((localVotes) => { return localVotes + vote.inc_votes})
         patchArticle(article_id, vote)
-        .then((article) => {
-            setLocalVotes(article.votes)
-            setHasVoted(!hasVoted)
-        })
-        .catch((err) => {
-            if (hasVoted) {
-                setLocalVotes(localVotes - 1)
+        .then((result) => {
+            if (result !== vote){
+                setLocalVotes(result.votes)
+                setHasVoted(!hasVoted)
             } else {
-                setLocalVotes(localVotes + 1)
+                setLocalVotes((localVotes) => { return localVotes - vote.inc_votes})
             }
-            setHasVoted(!hasVoted)
         })
     }
 
     return (
         <div className='article-focus'>
-            {isLoading ? <h4>Loading...</h4> : 
-                <>
                 <Link className="link" to={`/`}>
                     <button>Back to Articles</button>
                 </Link>
@@ -57,8 +51,7 @@ const ArticleFocus = ({isLoading, setIsLoading}) => {
                 <p>Votes: {votes}, Comments: {comment_count}</p>
                 <p>{body}</p>
                 <button className={hasVoted ? "voted" : "not-voted"} onClick={() => {handleVote()}}>{localVotes} votes</button>
-                <Comments article_id={article_id} isLoading={isLoading} setIsLoading={setIsLoading} />                
-                </>}
+                <Comments article_id={article_id} isLoading={isLoading} setIsLoading={setIsLoading} /> 
         </div>
     )
 }
