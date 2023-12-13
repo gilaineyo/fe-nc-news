@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path='/' element={<h2>Home</h2>} />
         <Route path='/articles/*' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading} />} />
-        <Route path='/topics' element={<Topics isLoading={isLoading} setIsLoading={setIsLoading} />} />
+        <Route path='/topics/*' element={<Topics isLoading={isLoading} setIsLoading={setIsLoading} />} />
       </Routes>
     </>
   )
