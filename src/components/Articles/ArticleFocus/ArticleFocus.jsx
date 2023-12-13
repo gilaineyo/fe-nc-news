@@ -5,6 +5,7 @@ import { useParams, Link } from 'react-router-dom'
 import Comments from './Comments/Comments'
 
 const ArticleFocus = ({isLoading, setIsLoading}) => {
+    const [votingError, setVotingError] = useState(false)
     const [currArticle, setCurrArticle] = useState({})
     const [hasVoted, setHasVoted] = useState(false)
     const [localVotes, setLocalVotes] = useState(0)
@@ -30,10 +31,12 @@ const ArticleFocus = ({isLoading, setIsLoading}) => {
         patchArticle(article_id, vote)
         .then((result) => {
             if (result !== vote){
+                setVotingError(false)
                 setLocalVotes(result.votes)
                 setHasVoted(!hasVoted)
             } else {
                 setLocalVotes((localVotes) => { return localVotes - vote.inc_votes})
+                setVotingError(true)
             }
         })
     }
@@ -51,6 +54,7 @@ const ArticleFocus = ({isLoading, setIsLoading}) => {
                 <p>Votes: {votes}, Comments: {comment_count}</p>
                 <p>{body}</p>
                 <button className={hasVoted ? "voted" : "not-voted"} onClick={() => {handleVote()}}>{localVotes} votes</button>
+                {votingError ? <p>Oops! Your vote hasn't been registered! Try again later.</p> : null}
                 <Comments article_id={article_id} isLoading={isLoading} setIsLoading={setIsLoading} /> 
         </div>
     )
