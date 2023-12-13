@@ -43,6 +43,24 @@ export const getUserDetails = (username) => {
     })
 }
 
+export const postCommentToArticle = (article_id, comment) => {
+    return newsApi.post(`/api/articles/${article_id}/comments`, comment)
+    .then(({data}) => {
+        return data.comment
+    })
+}
+
+export const getUser = (username) => {
+    return newsApi.get(`/api/users/${username}`)
+    .then(({data}) => {
+        return data.user
+    })
+}
+
+export const deleteComment = (comment_id) => {
+    return newsApi.delete(`/api/comments/${comment_id}`)
+}
+
 export const getTopics = () => {
     return newsApi.get('/api/topics')
     .then(({data}) => {
