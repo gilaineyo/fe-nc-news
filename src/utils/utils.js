@@ -4,8 +4,8 @@ const newsApi = axios.create({
     baseURL: 'https://gilaines-news-server.onrender.com'
 })
 
-export const getArticles = () => {
-    return newsApi.get('/api/articles')
+export const getArticles = (params) => {
+    return newsApi.get('/api/articles', params)
     .then(({data}) => {
         return data.articles
     })
@@ -59,4 +59,11 @@ export const getUser = (username) => {
 
 export const deleteComment = (comment_id) => {
     return newsApi.delete(`/api/comments/${comment_id}`)
+}
+
+export const getTopics = () => {
+    return newsApi.get('/api/topics')
+    .then(({data}) => {
+        return data.topics
+    })
 }

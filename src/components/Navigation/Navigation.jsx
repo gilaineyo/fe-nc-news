@@ -1,10 +1,13 @@
 import './Navigation.css'
+import {Link} from 'react-router-dom'
 
 const Navigation = () => {
     return (
-        <div className='navigation'>
-            <h2>Navigation</h2>
-        </div>
+        <nav className='navigation'>
+            <Link to="/">Home</Link>
+            <Link to="/articles">Articles</Link>
+            <Link to="/topics">Topics</Link>
+        </nav>
     )
 }
 

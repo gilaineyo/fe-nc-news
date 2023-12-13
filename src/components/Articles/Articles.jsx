@@ -5,11 +5,12 @@ import Filters from './Filters'
 import PostArticle from './PostArticle'
 import { getArticles } from '../../utils/utils'
 import ArticleFocus from './ArticleFocus/ArticleFocus'
-import {Routes, Route, Link} from 'react-router-dom'
+import {Routes, Route} from 'react-router-dom'
 
 const Articles = ({isLoading, setIsLoading}) => {
     const [articles, setArticles] = useState([])
-    
+
+
     useEffect(() => {
         setIsLoading(true)
         getArticles()
@@ -26,8 +27,8 @@ const Articles = ({isLoading, setIsLoading}) => {
             <Filters />
             <Routes>
                 <Route path='/' element={<ArticleCard articles={articles} />} />
-                <Route path='/articles/add-article' element={<PostArticle />} />
-                <Route path='/articles/:article_id' element={<ArticleFocus isLoading={isLoading} setIsLoading={setIsLoading} />} />
+                <Route path='/add-article' element={<PostArticle />} />
+                <Route path='/:article_id' element={<ArticleFocus isLoading={isLoading} setIsLoading={setIsLoading} />} />
             </Routes>
         </div>
     )

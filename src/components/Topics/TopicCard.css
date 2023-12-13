@@ -1,0 +1,8 @@
+.topic-card {
+    border: 2px solid black;
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+}

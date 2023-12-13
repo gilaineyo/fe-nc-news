@@ -43,9 +43,7 @@ const ArticleFocus = ({isLoading, setIsLoading}) => {
 
     return (
         <div className='article-focus'>
-                <Link className="link" to={`/`}>
-                    <button>Back to Articles</button>
-                </Link>
+                <Link className="link" to={`/articles`}>Back to Articles</Link>
                 {isLoading ? <h4>Loading...</h4> : null}
                 <h3>{title}</h3>
                 <img src={article_img_url} alt="article image" />
