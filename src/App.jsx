@@ -6,12 +6,15 @@ import Articles from './components/Articles/Articles'
 import Topics from './components/Topics/Topics'
 import { Routes, Route } from 'react-router-dom'
 import { UserProvider } from './contexts/UserContext'
+import Filters from './components/Filters/SortSelector'
+import { FilterProvider } from './contexts/FilterContext'
 
 function App() {
   const [isLoading, setIsLoading] = useState(false)
 
   return (
     <UserProvider>
+    <FilterProvider>
       <Header />
       <Navigation />
       <Routes>
@@ -19,6 +22,7 @@ function App() {
         <Route path='/articles/*' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading} />} />
         <Route path='/topics/*' element={<Topics isLoading={isLoading} setIsLoading={setIsLoading} />} />
       </Routes>
+    </FilterProvider>
     </UserProvider>
   )
 }
