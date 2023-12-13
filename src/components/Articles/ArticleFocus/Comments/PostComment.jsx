@@ -7,7 +7,9 @@ const PostComment = ({article_id, comments, setComments}) => {
     const { user, setUser } = useContext(UserContext)
     const [usernameInput, setUsernameInput] = useState('')
     const [commentInput, setCommentInput] = useState('')
-    const [isError, setIsError] = useState(false)
+    const [isLoginError, setIsLoginError] = useState(false)
+    const [isCommentError, setIsCommentError] = useState(false)
+    const [isPosting, setIsPosting] = useState(false)
 
     const handleLoginChange = (event) => {
         setUsernameInput(event.target.value)
@@ -18,10 +20,10 @@ const PostComment = ({article_id, comments, setComments}) => {
         getUser(usernameInput)
         .then((user) => {
             setUser(user)
-            setIsError(false)
+            setIsLoginError(false)
         })
         .catch(() => {
-            setIsError(true)
+            setIsLoginError(true)
         })
         setUsernameInput('')
     }
@@ -32,23 +34,26 @@ const PostComment = ({article_id, comments, setComments}) => {
 
     const handleCommentSubmit = (event) => {
         event.preventDefault()
+        setIsPosting(true)
         const comment = { username: user.username, body: commentInput }
         postCommentToArticle(article_id, comment)
         .then((newComment) => {
-          setComments([newComment, ...comments])  
+            setIsPosting(false)
+            setComments([newComment, ...comments])  
         })
         .catch(() => {
-            setIsError(true)
+            setIsPosting(false)
+            setIsCommentError(true)
         })
         setCommentInput('')
     }
+
 
     return (
         <div className='post-comment'>
             <h3>Post a comment</h3>
                 {user.username ? <p>Logged in as {user.username}</p> : 
                 <form className='login-form' onSubmit={handleLoginSubmit}>
-                    { isError ? <p>Uh-oh... something went wrong! Check you're logged in as a valid user!</p> : null } 
                     <label>Enter username: 
                         <input type="text" name="username" value={usernameInput} onChange={handleLoginChange} />
                         <button disabled={!usernameInput}>Log in</button>
@@ -60,6 +65,11 @@ const PostComment = ({article_id, comments, setComments}) => {
                 </label>
                 <button disabled={!commentInput}>Submit</button>
             </form>
+            <div className='messages'>
+                { isLoginError ? <p>Uh-oh... something went wrong! Check you're logged in as a valid user!</p> : null } 
+                { isPosting ? <p>Posting your comment...</p> : null }
+                { isCommentError ? <p>Sorry, your comment could not be posted, try again later.</p> : null }
+            </div>
         </div>
     )
 }
