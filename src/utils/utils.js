@@ -18,6 +18,17 @@ export const getSingleArticle = (article_id) => {
     })
 } 
 
+export const patchArticle = (article_id, vote) => {
+    return newsApi.patch(`/api/articles/${article_id}`, vote)
+    .then(({data}) => {
+        return data.article
+    })
+    .catch((err) => {
+        return vote
+    })
+}   
+     
+
 export const getArticleComments = (article_id) => {
     return newsApi.get(`/api/articles/${article_id}/comments `)
     .then(({data}) => {
