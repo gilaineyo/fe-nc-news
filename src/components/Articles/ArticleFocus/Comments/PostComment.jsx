@@ -21,8 +21,10 @@ const PostComment = ({article_id, comments, setComments}) => {
         .then((user) => {
             setUser(user)
             setIsLoginError(false)
+            setIsCommentError(false)
         })
         .catch(() => {
+            setIsCommentError(false)
             setIsLoginError(true)
         })
         setUsernameInput('')
@@ -38,6 +40,7 @@ const PostComment = ({article_id, comments, setComments}) => {
         const comment = { username: user.username, body: commentInput }
         postCommentToArticle(article_id, comment)
         .then((newComment) => {
+            setIsCommentError(false)
             setIsPosting(false)
             setComments([newComment, ...comments])  
         })
@@ -68,7 +71,8 @@ const PostComment = ({article_id, comments, setComments}) => {
             <div className='messages'>
                 { isLoginError ? <p>Uh-oh... something went wrong! Check you're logged in as a valid user!</p> : null } 
                 { isPosting ? <p>Posting your comment...</p> : null }
-                { isCommentError ? <p>Sorry, your comment could not be posted, try again later.</p> : null }
+                { isCommentError && user.username ? <p>Sorry, your comment could not be posted, try again later.</p> : null }
+                { isCommentError && !user.username ? <p>You need to log in to post a comment!</p> : null}
             </div>
         </div>
     )
