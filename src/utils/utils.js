@@ -42,3 +42,10 @@ export const getUserDetails = (username) => {
         return data.user
     })
 }
+
+export const getTopics = () => {
+    return newsApi.get('/api/topics')
+    .then(({data}) => {
+        return data.topics
+    })
+}
