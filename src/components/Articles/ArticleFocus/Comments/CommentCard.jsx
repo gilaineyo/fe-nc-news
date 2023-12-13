@@ -3,10 +3,11 @@ import { useEffect, useState, useContext } from "react"
 import './CommentCard.css'
 import { UserContext } from "../../../../contexts/UserContext"
 
-const CommentCard = ({comment, comments, setComments}) => {
+const CommentCard = ({comment}) => {
     const [authorProfile, setAuthorProfile] = useState({})
     const [isDeleted, setIsDeleted] = useState(false)
     const [deleteInProgress, setDeleteInProgress] = useState(false)
+    const [deletionError, setDeletionError] = useState(false)
     const {user} = useContext(UserContext)
     const { author, body, votes, created_at, comment_id } = comment
     const postedAt = new Date(created_at)
@@ -24,6 +25,10 @@ const CommentCard = ({comment, comments, setComments}) => {
         .then(() => {
             setDeleteInProgress(false)
             setIsDeleted(true)  
+        })
+        .catch(()=>{
+            setDeleteInProgress(false)
+            setDeletionError(true)
         })
     }
 
@@ -43,6 +48,7 @@ const CommentCard = ({comment, comments, setComments}) => {
 
     return (
         <div className="comment-card">
+            { deletionError ? <p>Failed to delete comment, try again later</p> : null }
             <img className='avatar' src={authorProfile.avatar_url} alt="user avatar" />
             <p className='posted-details'>{author}, {postedAt.toLocaleString()}</p>
             <p className='comment-body'>{body}</p>
