@@ -48,16 +48,17 @@ const PostComment = ({article_id, comments, setComments}) => {
             <h3>Post a comment</h3>
                 {user.username ? <p>Logged in as {user.username}</p> : 
                 <form className='login-form' onSubmit={handleLoginSubmit}>
-                    <label>{ isError ? "Not a valid user!" : "Not logged in!" } Enter username: 
+                    { isError ? <p>Uh-oh... something went wrong! Check you're logged in as a valid user!</p> : null } 
+                    <label>Enter username: 
                         <input type="text" name="username" value={usernameInput} onChange={handleLoginChange} />
-                        <button>Log in</button>
+                        <button disabled={!usernameInput}>Log in</button>
                     </label>
                 </form>}
             <form className="comment-form" onSubmit={handleCommentSubmit}>
                 <label>Comment: 
                     <input type="text" name="body" value={commentInput} onChange={handleCommentChange} />
                 </label>
-                <button>Submit</button>
+                <button disabled={!commentInput}>Submit</button>
             </form>
         </div>
     )
