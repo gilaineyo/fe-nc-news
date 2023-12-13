@@ -56,3 +56,7 @@ export const getUser = (username) => {
         return data.user
     })
 }
+
+export const deleteComment = (comment_id) => {
+    return newsApi.delete(`/api/comments/${comment_id}`)
+}
