@@ -26,8 +26,8 @@ const Articles = ({isLoading, setIsLoading}) => {
             <Filters />
             <Routes>
                 <Route path='/' element={<ArticleCard articles={articles} />} />
-                <Route path='/articles/add-article' element={<PostArticle />} />
-                <Route path='/articles/:article_id' element={<ArticleFocus isLoading={isLoading} setIsLoading={setIsLoading} />} />
+                <Route path='/add-article' element={<PostArticle />} />
+                <Route path='/:article_id' element={<ArticleFocus isLoading={isLoading} setIsLoading={setIsLoading} />} />
             </Routes>
         </div>
     )

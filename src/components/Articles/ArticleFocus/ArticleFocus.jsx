@@ -43,7 +43,7 @@ const ArticleFocus = ({isLoading, setIsLoading}) => {
 
     return (
         <div className='article-focus'>
-                <Link className="link" to={`/`}>
+                <Link className="link" to={`/articles`}>
                     <button>Back to Articles</button>
                 </Link>
                 {isLoading ? <h4>Loading...</h4> : null}
