@@ -2,8 +2,8 @@
     border: 1px solid black;
     display: grid;
     grid-template-areas:
-        "avatar posted upvote"
-        "avatar body body";
+        "avatar posted posted upvote"
+        "avatar body body delete";
 }
 
 .avatar {
@@ -20,4 +20,8 @@
 
 .upvote {
     grid-area: upvote;
+}
+
+.delete {
+    grid-area: delete;
 }
