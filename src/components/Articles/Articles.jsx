@@ -12,7 +12,7 @@ import { FilterContext } from '../../contexts/FilterContext'
 const Articles = ({isLoading, setIsLoading}) => {
     const [articles, setArticles] = useState([])
     const { artSort } = useContext(FilterContext)
-    const [articleSort, setArticleSort] = artSort
+    const [articleSort] = artSort
 
     const sortOptions = [
         { text: "Date (newest first)", sort_by: 'created_at', order: 'desc' }, 
@@ -29,6 +29,15 @@ const Articles = ({isLoading, setIsLoading}) => {
         .then((articles) => {
             setArticles(articles)
             setIsLoading(false)
+        })
+        .then(() => {
+            if(articleSort.sort_by === 'comment_count' && articleSort.order === 'asc') {
+                const sortedArticles = [...articles].sort((a, b) => a.comment_count - b.comment_count)
+                setArticles(sortedArticles)
+            } else if (articleSort.sort_by === 'comment_count') {
+                const sortedArticles = [...articles].sort((a, b) => b.comment_count - a.comment_count)
+                setArticles(sortedArticles)
+            }
         })
     }, [articleSort])
 

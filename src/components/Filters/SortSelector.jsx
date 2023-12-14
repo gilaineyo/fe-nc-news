@@ -2,7 +2,7 @@ import { FilterContext } from '../../contexts/FilterContext'
 import './SortSelector.css'
 import { useContext } from 'react'
 
-const SortSelector = ({sortOptions, type}) => {
+const SortSelector = ({sortOptions, type, topic}) => {
 
     const { artSort, comSort } = useContext(FilterContext)
     const [articleSort, setArticleSort] = artSort
@@ -13,7 +13,9 @@ const SortSelector = ({sortOptions, type}) => {
         const sort_by = event.target.options[index].getAttribute('sort_by')
         const order = event.target.options[index].getAttribute('order')
         if (type === 'articles') {
-            setArticleSort({ sort_by, order  })
+            setArticleSort({ sort_by, order })
+        } else if (type === 'topic') {
+            setArticleSort({ topic, sort_by, order })
         } else if (type === 'comments') {
             setCommentSort({ sort_by, order })
         }
