@@ -6,7 +6,8 @@ import TopicFocus from './TopicFocus'
 import {Routes, Route} from 'react-router-dom'
 import Error from '../Errors/Error'
 
-const Topics = ({isLoading, setIsLoading}) => {
+const Topics = () => {
+    const [isLoading, setIsLoading] = useState(false)
     const [topics, setTopics] = useState([])
     const [errorMsg, setErrorMsg] = useState('')
 
@@ -31,8 +32,7 @@ const Topics = ({isLoading, setIsLoading}) => {
             { isLoading ? <h3>Loading</h3> : null }
             <Routes>
                 <Route path='/' element={<TopicCard topics={topics} />} />
-                {/* <Route path='/add-topic' element={<PostTopic />} /> */}
-                <Route path='/:slug/*' element={<TopicFocus isLoading={isLoading} setIsLoading={setIsLoading} />} />
+                <Route path='/:slug/*' element={<TopicFocus />} />
             </Routes>
             
         </div>

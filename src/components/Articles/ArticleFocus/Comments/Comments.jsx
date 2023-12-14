@@ -5,8 +5,9 @@ import CommentCard from './CommentCard'
 import PostComment from './PostComment'
 import Error from '../../../Errors/Error'
 
-const Comments = ({article_id, isLoading, setIsLoading}) => {
+const Comments = ({article_id}) => {
     const [comments, setComments] = useState([])    
+    const [isLoading, setIsLoading] = useState(false)
     const [errorMsg, setErrorMsg] = useState('')
 
     useEffect(() => {
