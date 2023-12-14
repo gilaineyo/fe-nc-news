@@ -6,6 +6,7 @@ import Articles from './components/Articles/Articles'
 import Topics from './components/Topics/Topics'
 import { Routes, Route } from 'react-router-dom'
 import { UserProvider } from './contexts/UserContext'
+import Error from './components/Errors/Error'
 
 function App() {
   const [isLoading, setIsLoading] = useState(false)
@@ -15,6 +16,7 @@ function App() {
       <Header />
       <Navigation />
       <Routes>
+        <Route path='*' element={<Error message="That page doesn't exist!" />} />
         <Route path='/' element={<h2>Home</h2>} />
         <Route path='/articles/*' element={<Articles isLoading={isLoading} setIsLoading={setIsLoading} />} />
         <Route path='/topics/*' element={<Topics isLoading={isLoading} setIsLoading={setIsLoading} />} />
