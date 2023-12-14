@@ -11,9 +11,10 @@ import { FilterContext } from '../../contexts/FilterContext'
 
 const Articles = ({isLoading, setIsLoading}) => {
     const [articles, setArticles] = useState([])
-    const { sortOptions, setSortOptions } = useContext(FilterContext)
+    const { artSort } = useContext(FilterContext)
+    const [articleSort, setArticleSort] = artSort
 
-    const sorts = [
+    const sortOptions = [
         { text: "Date (newest first)", sort_by: 'created_at', order: 'desc' }, 
         { text: "Date (oldest first)", sort_by: 'created_at', order: 'asc' }, 
         { text: "Comments (most first)", sort_by: 'comment_count', order: 'desc' }, 
@@ -23,21 +24,20 @@ const Articles = ({isLoading, setIsLoading}) => {
     ]
     
     useEffect(() => {
-        setSortOptions(sorts)
         setIsLoading(true)
-        getArticles()
+        getArticles({params: articleSort})
         .then((articles) => {
             setArticles(articles)
             setIsLoading(false)
         })
-    }, [])
+    }, [articleSort])
 
 
     return (
         <div className='articles'>
             <h2>Articles</h2>
             {isLoading ? <h3>Loading...</h3> : null}
-            <SortSelector />
+            <SortSelector sortOptions={sortOptions} type='articles'/>
             <Routes>
                 <Route path='/' element={<ArticleCard articles={articles} />} />
                 <Route path='/add-article' element={<PostArticle />} />
