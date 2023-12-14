@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import Comments from './Comments/Comments'
 
-const ArticleFocus = ({isLoading, setIsLoading}) => {
+const ArticleFocus = () => {
+    const [isLoading, setIsLoading] = useState(false)
     const [votingError, setVotingError] = useState(false)
     const [currArticle, setCurrArticle] = useState({})
     const [hasVoted, setHasVoted] = useState(false)
@@ -53,7 +54,7 @@ const ArticleFocus = ({isLoading, setIsLoading}) => {
                 <p>{body}</p>
                 <button className={hasVoted ? "voted" : "not-voted"} onClick={() => {handleVote()}}>{localVotes} votes</button>
                 {votingError ? <p>Oops! Your vote hasn't been registered! Try again later.</p> : null}
-                <Comments article_id={article_id} isLoading={isLoading} setIsLoading={setIsLoading} /> 
+                <Comments article_id={article_id} /> 
         </div>
     )
 }
