@@ -4,8 +4,9 @@ import { getArticleComments } from '../../../../utils/utils'
 import CommentCard from './CommentCard'
 import PostComment from './PostComment'
 
-const Comments = ({article_id, isLoading, setIsLoading}) => {
+const Comments = ({article_id}) => {
     const [comments, setComments] = useState([])    
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         setIsLoading(true)

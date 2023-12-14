@@ -1,10 +1,12 @@
 import './ArticleCard.css'
 import {Link} from 'react-router-dom'
+import SortSelector from '../Filters/SortSelector'
 
 const ArticleCard = ({articles}) => {
     
     return (
         <div className='article-card'>
+            <SortSelector type='articles'/>
             <ul>
             {articles.map((article) => {
                 const { author, title, article_id, article_img_url, comment_count, votes, topic } = article
