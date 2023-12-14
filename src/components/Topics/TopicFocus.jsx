@@ -3,9 +3,11 @@ import { useState, useEffect } from 'react'
 import { useParams, Routes, Route, Link } from 'react-router-dom'
 import ArticleCard from '../Articles/ArticleCard'
 import { getArticles } from '../../utils/utils'
+import Error from '../Errors/Error'
 
 const TopicFocus = ({isLoading, setIsLoading}) => {
     const [articles, setArticles] = useState([])
+    const [errorMsg, setErrorMsg] = useState('')
     const {slug} = useParams()
     const params = { params: { topic: slug }}
 
@@ -16,8 +18,13 @@ const TopicFocus = ({isLoading, setIsLoading}) => {
             setArticles(articles)
             setIsLoading(false)
         })
-
+        .catch((err) => {
+            setIsLoading(false)
+            setErrorMsg(err)
+        })
     }, [])
+
+    if (errorMsg) return <Error errorMsg={errorMsg} /> 
 
     return (
         <div className='topic-focus'>
