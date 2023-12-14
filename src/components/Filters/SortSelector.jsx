@@ -1,17 +1,32 @@
 import { FilterContext } from '../../contexts/FilterContext'
 import './SortSelector.css'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 
-const SortSelector = ({sortOptions, type, topic}) => {
-
+const SortSelector = ({type, topic}) => {
     const { artSort, comSort } = useContext(FilterContext)
     const [articleSort, setArticleSort] = artSort
     const [commentSort, setCommentSort] = comSort
+    const [sortOptions, setSortOptions] = useState([])
+
+    useEffect(() => {
+
+        if (type === 'articles' || type === 'topic') {
+            setSortOptions([
+                { text: "Date (newest first)", sort_by: 'created_at', order: 'desc' }, 
+                { text: "Date (oldest first)", sort_by: 'created_at', order: 'asc' }, 
+                { text: "Comments (most first)", sort_by: 'comment_count', order: 'desc' }, 
+                { text: "Comments (fewest first)", sort_by: 'comment_count', order: 'asc' }, 
+                { text: "Votes (most first)", sort_by: 'votes', order: 'desc' }, 
+                { text: "Votes (fewest first)", sort_by: 'votes', order: 'asc'}
+                ])
+            }
+    }, [])
 
     const handleChange = (event) => {
         const index = event.target.options.selectedIndex
         const sort_by = event.target.options[index].getAttribute('sort_by')
         const order = event.target.options[index].getAttribute('order')
+        
         if (type === 'articles') {
             setArticleSort({ sort_by, order })
         } else if (type === 'topic') {
@@ -23,7 +38,6 @@ const SortSelector = ({sortOptions, type, topic}) => {
 
     return (
         <div className='sort'>
-            <h3>Filters</h3>
             <label>Sort by: 
                 <select onChange={handleChange}>
                     {sortOptions.map((sortOption) => {
