@@ -3,12 +3,13 @@ import { useState, useEffect, useContext } from 'react'
 import { useParams, Routes, Route, Link } from 'react-router-dom'
 import ArticleCard from '../Articles/ArticleCard'
 import { getArticles } from '../../utils/utils'
-
+import Error from '../Errors/Error'
 import { FilterContext } from '../../contexts/FilterContext'
 
 const TopicFocus = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [articles, setArticles] = useState([])
+    const [errorMsg, setErrorMsg] = useState('')
     const {slug} = useParams()
     const { artSort } = useContext(FilterContext)
     const [articleSort] = artSort
@@ -29,8 +30,13 @@ const TopicFocus = () => {
             }
             setIsLoading(false)
         })
-
+        .catch((err) => {
+            setIsLoading(false)
+            setErrorMsg(err)
+        })
     }, [articleSort])
+
+    if (errorMsg) return <Error errorMsg={errorMsg} /> 
 
     return (
         <div className='topic-focus'>

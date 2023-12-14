@@ -3,9 +3,11 @@ import './ArticleFocus.css'
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import Comments from './Comments/Comments'
+import Error from '../../Errors/Error'
 
 const ArticleFocus = () => {
     const [isLoading, setIsLoading] = useState(false)
+    const [errorMsg, setErrorMsg] = useState('')
     const [votingError, setVotingError] = useState(false)
     const [currArticle, setCurrArticle] = useState({})
     const [hasVoted, setHasVoted] = useState(false)
@@ -20,6 +22,10 @@ const ArticleFocus = () => {
             setLocalVotes(article.votes)
             setIsLoading(false)
         })
+        .catch((err) => {
+            setIsLoading(false)
+            setErrorMsg(err)
+        })
     }, [])
     
 
@@ -31,16 +37,18 @@ const ArticleFocus = () => {
         setLocalVotes((localVotes) => { return localVotes + vote.inc_votes})
         patchArticle(article_id, vote)
         .then((result) => {
-            if (result !== vote){
                 setVotingError(false)
                 setLocalVotes(result.votes)
                 setHasVoted(!hasVoted)
-            } else {
-                setLocalVotes((localVotes) => { return localVotes - vote.inc_votes})
-                setVotingError(true)
-            }
+        })
+        .catch(() => {
+            setLocalVotes((localVotes) => { return localVotes - vote.inc_votes})
+            setVotingError(true)
         })
     }
+    
+
+    if (errorMsg !== '') return <Error errorMsg={errorMsg} />
 
     return (
         <div className='article-focus'>

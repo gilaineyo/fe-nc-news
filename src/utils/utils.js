@@ -4,6 +4,25 @@ const newsApi = axios.create({
     baseURL: 'https://gilaines-news-server.onrender.com'
 })
 
+newsApi.interceptors.request.use(
+    function (config){
+        return config
+    }, function (error) {
+        console.log(error.config.msg)
+        return Promise.reject(error.request.data.msg)
+    })
+
+newsApi.interceptors.response.use(
+    function (response){
+        return response
+    }, function (error) {
+        if (error.code === "ERR_NETWORK") {
+            return Promise.reject('Server error')
+        } else {
+            return Promise.reject(error.response.data.msg)
+        }
+    })
+
 export const getArticles = (params) => {
     return newsApi.get('/api/articles', params)
     .then(({data}) => {
@@ -22,9 +41,6 @@ export const patchArticle = (article_id, vote) => {
     return newsApi.patch(`/api/articles/${article_id}`, vote)
     .then(({data}) => {
         return data.article
-    })
-    .catch((err) => {
-        return vote
     })
 }   
      

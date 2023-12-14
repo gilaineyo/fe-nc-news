@@ -6,6 +6,7 @@ import Topics from './components/Topics/Topics'
 import { Routes, Route } from 'react-router-dom'
 import { UserProvider } from './contexts/UserContext'
 import { FilterProvider } from './contexts/FilterContext'
+import Error from './components/Errors/Error'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
       <Header />
       <Navigation />
       <Routes>
+        <Route path='*' element={<Error errorMsg="That page doesn't exist!" />} />
         <Route path='/' element={<h2>Home</h2>} />
         <Route path='/articles/*' element={<Articles />} />
         <Route path='/topics/*' element={<Topics />} />

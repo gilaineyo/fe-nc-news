@@ -6,14 +6,15 @@ import { getArticles } from '../../utils/utils'
 import ArticleFocus from './ArticleFocus/ArticleFocus'
 import {Routes, Route} from 'react-router-dom'
 import { FilterContext } from '../../contexts/FilterContext'
-
+import Error from '../Errors/Error'
 
 const Articles = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [articles, setArticles] = useState([])
     const { artSort } = useContext(FilterContext)
-    const [articleSort] = artSort
-    
+    const [articleSort] = artSort    
+    const [errorMsg, setErrorMsg] = useState('')
+
     useEffect(() => {
         setIsLoading(true)
         getArticles({params: articleSort})
@@ -29,8 +30,13 @@ const Articles = () => {
             }
             setIsLoading(false)
         })
+        .catch((err) => {
+            setIsLoading(false)
+            setErrorMsg(err)
+        })
     }, [articleSort])
 
+    if (errorMsg) return <Error errorMsg={errorMsg} />
 
     return (
         <div className='articles'>
