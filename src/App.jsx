@@ -16,7 +16,7 @@ function App() {
       <Header />
       <Navigation />
       <Routes>
-        <Route path='*' element={<Error message="That page doesn't exist!" />} />
+        <Route path='*' element={<Error errorMsg="That page doesn't exist!" />} />
         <Route path='/' element={<h2>Home</h2>} />
         <Route path='/articles/*' element={<Articles />} />
         <Route path='/topics/*' element={<Topics />} />
