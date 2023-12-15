@@ -1,3 +1,36 @@
 .header {
-    border: 3px solid green;
+    display: grid;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
+    height: 20%;
+    grid-template-areas:
+        "login header"
+        "nav header";
+}
+
+h1 {
+    padding-right: 0.5em;
+    grid-area: header;
+}
+
+.user-info {
+    grid-area: login;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 0.1em;
+    padding-left: 0.5em;
+}
+
+.user-info p {
+    font-size: 0.8rem;
+    padding-left: 0.5em;
+}
+
+.navigation {
+    grid-area: nav;
+    padding: 0.5em;
+    padding-bottom: 0.1em;
 }

@@ -1,0 +1,45 @@
+body {
+    font-family: Roboto;
+    color: white;
+    background: rgb(182,34,124);
+    background: radial-gradient(circle, rgba(182,34,124,1) 0%, rgba(66,23,91,1) 100%);
+    background-size: cover;
+    font-size: 62.5%
+}
+
+html {
+    font-size: 20px;
+}
+  
+@media (max-width: 900px) {
+    html { font-size: 16px; }
+}
+  
+@media (max-width: 400px) {
+    html { font-size: 12px; }
+}
+
+h1 {
+    font-size: 2.4rem;
+    text-shadow: 1px 1px #363434;
+}
+  
+h2 {
+    font-size: 2rem;
+    text-shadow: 1px 1px #363434;
+}
+  
+h3 {
+    font-size: 1.8rem;
+    text-shadow: 1px 1px #363434;
+}
+
+h4 {
+    font-size: 1.6rem;
+    text-shadow: 1px 1px #363434;
+}
+
+p {
+    font-size: 1.4rem;
+}
+

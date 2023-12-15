@@ -40,9 +40,7 @@ const Articles = () => {
 
     return (
         <div className='articles'>
-            <h2>Articles</h2>
-            {isLoading ? <h3>Loading...</h3> : null}
-            
+            {isLoading ? <h3>Loading...</h3> : null }
             <Routes>
                 <Route path='/' element={<ArticleCard articles={articles} />} />
                 <Route path='/add-article' element={<PostArticle />} />

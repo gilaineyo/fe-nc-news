@@ -14,7 +14,6 @@ function App() {
     <UserProvider>
     <FilterProvider>
       <Header />
-      <Navigation />
       <Routes>
         <Route path='*' element={<Error errorMsg="That page doesn't exist!" />} />
         <Route path='/' element={<h2>Home</h2>} />

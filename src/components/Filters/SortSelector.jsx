@@ -23,6 +23,7 @@ const SortSelector = ({type, topic}) => {
     }, [])
 
     const handleChange = (event) => {
+        console.log(event.target)
         const index = event.target.options.selectedIndex
         const sort_by = event.target.options[index].getAttribute('sort_by')
         const order = event.target.options[index].getAttribute('order')

@@ -7,7 +7,6 @@
     grid-template-areas: 
         "img title title title more"
         "img author topic votes comments";
-    border: 1px solid black;
 }
 
 img {
